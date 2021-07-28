@@ -24,7 +24,11 @@ public class Ball : MonoBehaviour
         if (hits)
         {
             direction = Vector2.Reflect(direction, hits.normal).normalized;
-            Destroy(hits.collider.gameObject);
+            var block = hits.collider.GetComponent<Block>();
+            if (block)
+                block.StartBust();
+            else
+                Destroy(hits.collider.gameObject);
             Handheld.Vibrate();
             transform.position = hits.point;
         }
