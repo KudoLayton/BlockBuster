@@ -9,6 +9,8 @@ public class Ball : MonoBehaviour
     float speed;
     [SerializeField]
     float radius = 0.3f;
+    [SerializeField]
+    GameObject spark;
     Vector2 direction;
     new Renderer renderer;
     // Start is called before the first frame update
@@ -28,9 +30,14 @@ public class Ball : MonoBehaviour
             if (block)
                 block.StartBust();
             else
-                Destroy(hits.collider.gameObject);
+            {
+                GameObject newSpark = Instantiate(spark, hits.point, Quaternion.identity);
+                ParticleSystem.ShapeModule shape = newSpark.GetComponent<ParticleSystem>().shape;
+                shape.rotation = new Vector3(0, Vector2.SignedAngle(Vector2.down, hits.normal), 0);
+            }
             Handheld.Vibrate();
             transform.position = hits.point;
+            transform.Translate(direction * speed * Time.fixedDeltaTime, Space.World);
         }
         else
         {
