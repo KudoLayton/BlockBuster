@@ -2,7 +2,9 @@
 
 ---
 
-Shoot bullets to destroy shiny blocks![BlockBusterDemo](BlockBusterDemo.gif | height=120px)
+Shoot bullets to destroy shiny blocks 
+
+<img src="BlockBusterDemo.gif" height="300">
 
 ## Development Environment
 
